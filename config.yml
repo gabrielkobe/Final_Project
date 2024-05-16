@@ -1,0 +1,35 @@
+---
+- hosts: all
+  become: true
+  vars:
+    admin_ip: 192.168.56.101
+    users_network: 192.168.56.102
+    printer_ip: 192.168.56.102
+ 
+- hosts: admin
+  become: true
+  roles:
+      - docker
+
+- hosts: user
+  become: true
+  roles:
+      - restrict
+      - set_roles
+      - prometheus
+      
+- name: Docker Resource Allocation Playbook
+  hosts: all
+  become: yes
+
+  vars:
+    memory_limit: "512m"
+    swap_limit: "1g"
+    soft_memory_limit: "512m"
+    cpu_limit: "1.0"
+    docker_image: "nginx"
+    grub_config_file: "/etc/default/grub"
+    grub_cmd: 'GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1"'
+
+  roles:
+    - resource

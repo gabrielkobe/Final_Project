@@ -1,0 +1,25 @@
+---
+  - name: Deploy admin container
+    docker_container:
+      name: admin
+      image: admin-image
+      networks:
+        - name: admin
+      state: started
+
+  - name: Deploy users containers
+    docker_container:
+      name: "user-{{ item }}"
+      image: user-image
+      networks:
+        - name: users
+      state: started
+    loop: "{{ range(1, 11)|list }}"
+
+  - name: Deploy printer container
+    docker_container:
+      name: printer
+      image: printer-image
+      networks:
+        - name: printer
+      state: started

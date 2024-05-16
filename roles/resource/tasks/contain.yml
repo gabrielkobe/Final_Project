@@ -1,0 +1,14 @@
+---
+- name: Run Docker container with resource limits
+  command: >
+    docker run -dit
+    --memory="{{ memory_limit }}"
+    --memory-swap="{{ swap_limit }}"
+    --memory-reservation="{{ soft_memory_limit }}"
+    --cpus="{{ cpu_limit }}"
+    {{ docker_image }}
+  register: docker_run_output
+
+- name: Debug container ID
+  debug:
+    msg: "Container ID is {{ docker_run_output.stdout }}"

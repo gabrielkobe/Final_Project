@@ -1,0 +1,11 @@
+---
+- name: Set GRUB configuration for swap memory
+  lineinfile:
+    path: "{{ grub_config_file }}"
+    regexp: '^GRUB_CMDLINE_LINUX='
+    line: '{{ grub_cmd }}'
+    backup: yes
+
+- name: Update GRUB
+  command: update-grub
+

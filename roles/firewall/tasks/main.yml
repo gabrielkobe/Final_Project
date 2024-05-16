@@ -1,0 +1,23 @@
+- name: Configure firewall rules
+  iptables:
+    state: present
+    chain: FORWARD
+    protocol: tcp
+    source: "{{ admin }}"
+    destination: "{{ user }}"
+    jump: ACCEPT
+
+- name: Allow printer access from admin
+  iptables:
+    state: present
+    chain: FORWARD
+    protocol: tcp
+    source: "{{ admin }}"
+    destination: "{{ printer }}"
+    jump: ACCEPT
+
+- name: Block all other traffic
+  iptables:
+    state: present
+    chain: FORWARD
+    jump: DROP

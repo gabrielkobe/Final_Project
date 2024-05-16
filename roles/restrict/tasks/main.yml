@@ -1,0 +1,25 @@
+---
+    - name: Block Gambling
+      lineinfile:
+        dest: /etc/hosts
+        line: "0.0.0.0 gambling.com www.gambling.com"
+        insertbefore: EOF
+
+    - name: Block Fitgirl
+      lineinfile:
+        dest: /etc/hosts
+        line: "0.0.0.0 fitgirl-repack.site www.fitgirl-repacks.site"
+        insertbefore: EOF
+
+    - name: Block BetOnline
+      lineinfile:
+        dest: /etc/hosts
+        line: "0.0.0.0 BetOnline.ag www.BetOnline.ag"
+        insertbefore: EOF
+
+    - name: Block Pornhub
+      lineinfile:
+        dest: /etc/hosts
+        line: "0.0.0.0 Pornhub.com www.Pornhub.com"
+        insertbefore: EOF
+
